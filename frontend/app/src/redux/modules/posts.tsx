@@ -10,7 +10,7 @@ type Post = {
     img: string;
 };
 
-type PostState = {
+export type PostState = {
     posts: Post[];
     loading: boolean;
 };
@@ -39,7 +39,7 @@ export const loadPosts = () => {
                     },
                 ])
             );
-        }, 5000);
+        }, 1000);
     };
 };
 
