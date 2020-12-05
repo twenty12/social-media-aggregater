@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import NavBar from "./features/NavBar"
+import NavBar from "./features/Header"
 import Feed from "./features/feed"
 import './App.css';
 import { loadPosts } from "./redux/modules/posts"
