@@ -34,6 +34,13 @@ export const sailorData = {
             gender: 'F',
             age: 46,
             boatId: 1
+        },
+        {
+            id: 5,
+            name: 'Daniel',
+            gender: 'M',
+            age: 31,
+            boatId: 1
         }
     ]
 }

@@ -5,11 +5,11 @@ type PostProps = {
     data: Post
 }
 
-const PostItem: FunctionComponent<PostProps> = ({ data }) => {
+const PostCard: FunctionComponent<PostProps> = ({ data }) => {
     return (
         <div className="card">
                 <div className="card-body">Basic card</div>
         </div>
     )
 }
-export default PostItem
+export default PostCard
