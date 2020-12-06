@@ -12,6 +12,8 @@ export type Post = {
     description: string,
     image: string,
     url: string
+    boatId?: number,
+    sailorId?: number
 }
 
 export type PostState = {
