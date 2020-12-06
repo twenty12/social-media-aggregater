@@ -54,6 +54,3 @@ export function postReducer(
             return state;
     }
 }
-// const store = createStore(postReducer, applyMiddleware(thunk))
-// store.subscribe(() => console.log(store.getState()))
-// export default store

@@ -9,6 +9,15 @@ export const feedUpdate = {
             description: 'A video description.',
             image: '',
             url: 'https://www.youtube.com/watch?v=8RfWWMMWPy8&ab_channel=PipHareOceanRacing'
+        },
+        {
+            id: 2,
+            source: 'YouTube',
+            publishTime: '2020-11-05T07:02:54Z',
+            title: 'Some New Video 2',
+            description: 'A video description.2',
+            image: '',
+            url: 'https://www.youtube.com/watch?v=AETzg6ACmSc&ab_channel=PipHareOceanRacing'
         }
     ]
 }

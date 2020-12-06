@@ -7,7 +7,9 @@ type PostProps = {
 
 const PostItem: FunctionComponent<PostProps> = ({ data }) => {
     return (
-        <h1>{data.id}</h1>
+        <div className="card">
+                <div className="card-body">Basic card</div>
+        </div>
     )
 }
 export default PostItem

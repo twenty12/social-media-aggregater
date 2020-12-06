@@ -14,9 +14,8 @@ const Feed: FunctionComponent = () => {
     const postItems = posts.map((post) => {
         return <PostItem data={post}/>
       })
-
       return (
-        <div>
+        <div className="container">
             {postItems}
         </div>
     )
