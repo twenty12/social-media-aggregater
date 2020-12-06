@@ -4,7 +4,7 @@ import thunk from "redux-thunk"
 
 import {feedUpdate} from "./mock_data"
 
-type Post = {
+export type Post = {
     id: number,
     source: string,
     publishTime: string,
