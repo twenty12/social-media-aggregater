@@ -2,13 +2,17 @@ import { typedAction } from './index';
 import { Dispatch, AnyAction, createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk"
 
+import {feedUpdate} from "./mock_data"
 
 type Post = {
-    id: number;
-    flag: string;
-    position: number;
-    img: string;
-};
+    id: number,
+    source: string,
+    publishTime: string,
+    title: string,
+    description: string,
+    image: string,
+    url: string
+}
 
 export type PostState = {
     posts: Post[];
@@ -27,17 +31,8 @@ export const addPosts = (products: Post[]) => {
 export const loadPosts = () => {
     return (dispatch: Dispatch<AnyAction>) => {
         setTimeout(() => {
-            console.log('add again')
-            // Pretend to load an item
             dispatch(
-                addPosts([
-                    {
-                        id: 1,
-                        flag: 'UK',
-                        position: 33,
-                        img: 'https://placeimg.com/640/480/tech/5',
-                    },
-                ])
+                addPosts(feedUpdate['posts'])
             );
         }, 1000);
     };
@@ -51,7 +46,6 @@ export function postReducer(
 ): PostState {
     switch (action.type) {
         case 'posts/ADD_POSTS':
-            console.log('adding posts')
             return {
                 ...state,
                 posts: [...state.posts, ...action.payload],
