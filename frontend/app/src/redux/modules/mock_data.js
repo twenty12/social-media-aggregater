@@ -10,7 +10,7 @@ export const feedUpdate = {
             image: '',
             url: 'https://www.youtube.com/watch?v=8RfWWMMWPy8&ab_channel=PipHareOceanRacing',
             sailorId: 1,
-            teamId: 1
+            boatId: 1
         },
         {
             id: 2,

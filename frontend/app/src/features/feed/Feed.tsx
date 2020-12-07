@@ -1,10 +1,17 @@
-import React, {useEffect, FunctionComponent} from 'react';
+import React, {useEffect, FunctionComponent} from 'react'
 import PostCard from './PostCard'
 import { useSelector, useDispatch } from "react-redux"
 import { loadPosts } from "../../redux/modules/posts"
 import { loadBoats, loadSailors } from "../../redux/modules/teams"
 
 import {RootState} from "../../redux/reducer"
+
+const arrToObjKeyedById = (arr: any) => {
+    return arr.reduce(function(acc: any, cur: any, i: number) {
+        acc[cur['id']] = cur;
+        return acc;
+      }, {});
+}
 
 const Feed: FunctionComponent = () => {
     const dispatch = useDispatch()
@@ -13,16 +20,18 @@ const Feed: FunctionComponent = () => {
         dispatch(loadSailors() as any)
         dispatch(loadBoats() as any)
     }, [])
-    const posts = useSelector( (state: RootState) => state.post.posts);
-    const sailors = useSelector( (state: RootState) => state.team.sailors);
-    const boats = useSelector( (state: RootState) => state.team.boats);
-    const keyedSailor = {1: {sailorName: 'Pip'}} //you need to make boats and sailors into keyed objects so you don't just loop through them everytime
-    var keySailors = sailors.reduce(function(acc: any, cur: any, i: number) {
-        acc[cur['id']] = cur;
-        return acc;
-      }, {});
+    const posts = useSelector( (state: RootState) => state.post.posts)
+    const sailors = arrToObjKeyedById(
+        useSelector( (state: RootState) => state.team.sailors))
+    const boats = arrToObjKeyedById(
+        useSelector( (state: RootState) => state.team.boats))
     const postItems = posts.map((post) => {
-        return <PostCard data={post}/>
+        const getSailorDataWhenOnceAvailable = () => (Object.keys(sailors).length === 0) ? {} : sailors[post.sailorId!]
+        const getBoatDataWhenOnceAvailable = () => (Object.keys(boats).length === 0) ? {} : boats[post.boatId!]
+        return <PostCard
+            postData={post}
+            sailorData={getSailorDataWhenOnceAvailable()}
+            boatData={getBoatDataWhenOnceAvailable()}/>
       })
       return (
         <div className="container">
