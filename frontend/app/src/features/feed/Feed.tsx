@@ -35,7 +35,7 @@ const Feed: FunctionComponent = () => {
       })
       return (
         <div className="container">
-            {postItems}
+                {postItems}
         </div>
     )
 }

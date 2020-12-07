@@ -15,14 +15,29 @@ var nameToEmoji: { [key: string]: string; } = {
     UK: '🇬🇧'
 };
 
+
+//TODO figure out why boatdata is now wokring
 const PostCard: FunctionComponent<PostProps> = ({ postData, sailorData, boatData }) => {
-    console.log(boatData)
     return (
-        <div key={postData.id} className="card my-2">
-            <div className="card-header">
-                {nameToEmoji['UK']} {sailorData.name} 
+        <div className="row justify-content-center">
+            <div className="my-2 col-8">
+                <div key={postData.id} className="card border-dark">
+                    <div className="card-header bg-white border-0">
+                        {sailorData.name} {nameToEmoji['UK']} <br></br>
+                        <small>Boat: Position: 4 Flag: </small>
+                    </div>
+                    <div className="card-body">
+                        <div className="embed-responsive embed-responsive-16by9">
+                        <iframe
+                            className="embed-responsive-item border-0"
+                            src={`https://www.youtube.com/embed/${postData.sourceId}`}
+                            allow='autoplay; encrypted-media'
+                            title='video'
+                        />
+                        </div>
+                    </div>
+                </div>
             </div>
-                <div className="card-body">Basic card</div>
         </div>
     )
 }

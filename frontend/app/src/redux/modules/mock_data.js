@@ -9,6 +9,7 @@ export const feedUpdate = {
             description: 'A video description.',
             image: '',
             url: 'https://www.youtube.com/watch?v=8RfWWMMWPy8&ab_channel=PipHareOceanRacing',
+            sourceId: "8RfWWMMWPy8",
             sailorId: 1,
             boatId: 1
         },
@@ -19,6 +20,7 @@ export const feedUpdate = {
             title: 'Some New Video 2',
             description: 'A video description.2',
             image: '',
+            sourceId: "8RfWWMMWPy8",
             url: 'https://www.youtube.com/watch?v=AETzg6ACmSc&ab_channel=PipHareOceanRacing',
             sailorId: 1,
             boatId: 1
@@ -52,7 +54,7 @@ export const boatData = {
             id: 1,
             name: 'Medellia',
             flag: 'UK',
-            positon: 34
+            position: 34
         }
     ]
 }

@@ -12,6 +12,7 @@ export type Post = {
     description: string,
     image: string,
     url: string
+    sourceId?: string,
     boatId?: number,
     sailorId?: number
 }

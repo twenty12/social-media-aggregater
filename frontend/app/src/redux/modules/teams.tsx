@@ -16,7 +16,7 @@ export type Sailor = {
 export type Boat = {
     id: number,
     name: string,
-    positon: number,
+    position: number,
     flag: string
 }
 

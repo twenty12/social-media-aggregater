@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.mw-18rem {
+    max-width: 40rem;
+}
+
+.mh-30rem {
+    min-height: 30rem;
+}
