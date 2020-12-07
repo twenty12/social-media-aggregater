@@ -1,6 +1,5 @@
 import { typedAction } from './index';
-import { Dispatch, AnyAction, createStore, applyMiddleware } from 'redux';
-import thunk from "redux-thunk"
+import { Dispatch, AnyAction } from 'redux';
 
 import {feedUpdate} from "./mock_data"
 
@@ -51,6 +50,7 @@ export function postReducer(
         case 'posts/ADD_POSTS':
             return {
                 ...state,
+                loading: false,
                 posts: [...state.posts, ...action.payload],
             };
         default:

@@ -4,11 +4,8 @@ import { Boat, Sailor } from '../../redux/modules/teams'
 
 type PostProps = {
     postData: Post,
-    sailorData: Boat,
-    boatData: Sailor
-}
-type EmojiProps = {
-    flag: string,
+    sailorData: Sailor,
+    boatData: Boat
 }
 
 var nameToEmoji: { [key: string]: string; } = {
@@ -16,9 +13,7 @@ var nameToEmoji: { [key: string]: string; } = {
 };
 
 
-//TODO figure out why boatdata is now wokring
 const PostCard: FunctionComponent<PostProps> = ({ postData, sailorData, boatData }) => {
-    // console.log(type boatData)
     return (
         <div key={postData.id} className="row justify-content-center">
             <div className="my-2 col-8">
@@ -26,9 +21,9 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, sailorData, boatData
                     <div className="card-header bg-white border-0">
                         <div className="d-flex">
                             <div className="mr-auto">{sailorData.name}</div>
-                            <div>{nameToEmoji['UK']}</div>
+                            {nameToEmoji[boatData.flag]}
                         </div>
-                        <small>Boat: Position: 4 Flag: </small>
+                        <small>{boatData.name}</small>
                     </div>
                     <div className="card-body">
                         <div className="embed-responsive embed-responsive-16by9">

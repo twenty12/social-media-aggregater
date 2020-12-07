@@ -1,6 +1,5 @@
 import { typedAction } from './index';
-import { Dispatch, AnyAction, createStore, applyMiddleware } from 'redux';
-import thunk from "redux-thunk"
+import { Dispatch, AnyAction } from 'redux';
 
 import {sailorData, boatData} from "./mock_data"
 
@@ -59,8 +58,6 @@ export const loadSailors = () => {
 };
 
 type ActionType = ReturnType<typeof addBoat> | ReturnType<typeof addSailor>;
-
-
 
 export function teamReducer(state = initialState, action: ActionType) {
     switch (action.type) {

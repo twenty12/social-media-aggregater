@@ -21,10 +21,12 @@ const Feed: FunctionComponent = () => {
         dispatch(loadBoats() as any)
     }, [])
     const posts = useSelector( (state: RootState) => state.post.posts)
+    const loading = useSelector( (state: RootState) => state.post.loading)
     const sailors = arrToObjKeyedById(
         useSelector( (state: RootState) => state.team.sailors))
     const boats = arrToObjKeyedById(
         useSelector( (state: RootState) => state.team.boats))
+
     const postItems = posts.map((post) => {
         const getSailorDataWhenOnceAvailable = () => (Object.keys(sailors).length === 0) ? {} : sailors[post.sailorId!]
         const getBoatDataWhenOnceAvailable = () => (Object.keys(boats).length === 0) ? {} : boats[post.boatId!]
@@ -33,11 +35,15 @@ const Feed: FunctionComponent = () => {
             sailorData={getSailorDataWhenOnceAvailable()}
             boatData={getBoatDataWhenOnceAvailable()}/>
       })
-      return (
-        <div className="container">
+      if (loading) {
+          return <h1>Loading...</h1>
+      } else {
+        return (
+            <div className="container">
                 {postItems}
-        </div>
-    )
+            </div>
+        )
+    }
 }
 
 export default Feed

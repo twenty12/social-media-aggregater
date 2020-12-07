@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavBar from "./features/Header"
 import Feed from "./features/feed/Feed"
 import './App.css';
 import { loadPosts } from "./redux/modules/posts"
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import './index.css';
 
 function App() {
