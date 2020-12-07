@@ -7,10 +7,21 @@ type PostProps = {
     sailorData: Boat,
     boatData: Sailor
 }
+type EmojiProps = {
+    flag: string,
+}
 
-const PostCard: FunctionComponent<PostProps> = ({ postData, boatData, sailorData }) => {
+var nameToEmoji: { [key: string]: string; } = {
+    UK: '🇬🇧'
+};
+
+const PostCard: FunctionComponent<PostProps> = ({ postData, sailorData, boatData }) => {
+    console.log(boatData)
     return (
-        <div className="card">
+        <div key={postData.id} className="card my-2">
+            <div className="card-header">
+                {nameToEmoji['UK']} {sailorData.name} 
+            </div>
                 <div className="card-body">Basic card</div>
         </div>
     )

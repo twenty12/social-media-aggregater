@@ -51,6 +51,7 @@ export const boatData = {
         {
             id: 1,
             name: 'Medellia',
+            flag: 'UK',
             positon: 34
         }
     ]

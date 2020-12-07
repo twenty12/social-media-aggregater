@@ -16,7 +16,8 @@ export type Sailor = {
 export type Boat = {
     id: number,
     name: string,
-    positon: number
+    positon: number,
+    flag: string
 }
 
 export type TeamState = {
@@ -71,7 +72,7 @@ export function teamReducer(state = initialState, action: ActionType) {
         case 'teams/ADD_BOAT':
             return {
                 ...state,
-                teams: [...state.boats, ...action.payload],
+                boats: [...state.boats, ...action.payload],
             };
         default:
             return state;
