@@ -18,12 +18,16 @@ var nameToEmoji: { [key: string]: string; } = {
 
 //TODO figure out why boatdata is now wokring
 const PostCard: FunctionComponent<PostProps> = ({ postData, sailorData, boatData }) => {
+    // console.log(type boatData)
     return (
-        <div className="row justify-content-center">
+        <div key={postData.id} className="row justify-content-center">
             <div className="my-2 col-8">
-                <div key={postData.id} className="card border-dark">
+                <div className="card border-dark">
                     <div className="card-header bg-white border-0">
-                        {sailorData.name} {nameToEmoji['UK']} <br></br>
+                        <div className="d-flex">
+                            <div className="mr-auto">{sailorData.name}</div>
+                            <div>{nameToEmoji['UK']}</div>
+                        </div>
                         <small>Boat: Position: 4 Flag: </small>
                     </div>
                     <div className="card-body">
