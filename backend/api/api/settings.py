@@ -25,7 +25,9 @@ SECRET_KEY = 'o^*v(*^(xefrprl*z_xb_1cpu(p9t33uu0tyab0hnikapq9sz!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'social-media-aggregater.herokuapp.com'
+]
 
 
 # Application definition
