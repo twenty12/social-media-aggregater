@@ -1,1 +1,1 @@
-web: cd backend/api && gunicorn api:api
+web: cd backend/api && gunicorn api.wsgi
