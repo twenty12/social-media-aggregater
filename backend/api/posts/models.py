@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Post(models.Model):
     PLATFORM_CHOICES = [
         ('youtube', 'youtube')
