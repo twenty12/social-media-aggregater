@@ -26,7 +26,8 @@ SECRET_KEY = 'o^*v(*^(xefrprl*z_xb_1cpu(p9t33uu0tyab0hnikapq9sz!'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'social-media-aggregater.herokuapp.com'
+    'social-media-aggregater.herokuapp.com',
+    '127.0.0.1'
 ]
 
 
