@@ -17,23 +17,22 @@ const Feed: FunctionComponent = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(loadPosts() as any)
-        dispatch(loadSailors() as any)
-        dispatch(loadBoats() as any)
+        // dispatch(loadSailors() as any)
+        // dispatch(loadBoats() as any)
     }, [])
     const posts = useSelector( (state: RootState) => state.post.posts)
     const loading = useSelector( (state: RootState) => state.post.loading)
-    const sailors = arrToObjKeyedById(
-        useSelector( (state: RootState) => state.team.sailors))
-    const boats = arrToObjKeyedById(
-        useSelector( (state: RootState) => state.team.boats))
+    // const sailors = arrToObjKeyedById(
+        // useSelector( (state: RootState) => state.team.sailors))
+    // const boats = arrToObjKeyedById(
+        // useSelector( (state: RootState) => state.team.boats))
 
     const postItems = posts.map((post) => {
-        const getSailorDataWhenOnceAvailable = () => (Object.keys(sailors).length === 0) ? {} : sailors[post.sailorId!]
-        const getBoatDataWhenOnceAvailable = () => (Object.keys(boats).length === 0) ? {} : boats[post.boatId!]
-        return <PostCard
-            postData={post}
-            sailorData={getSailorDataWhenOnceAvailable()}
-            boatData={getBoatDataWhenOnceAvailable()}/>
+        // const getSailorDataWhenOnceAvailable = () => (Object.keys(sailors).length === 0) ? {} : sailors[post.sailorId!]
+        // const getBoatDataWhenOnceAvailable = () => (Object.keys(boats).length === 0) ? {} : boats[post.boatId!]
+        return <PostCard postData={post} />
+            // sailorData={getSailorDataWhenOnceAvailable()}
+            // boatData={getBoatDataWhenOnceAvailable()}/>
       })
       if (loading) {
           return <h1>Loading...</h1>

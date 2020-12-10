@@ -1,19 +1,17 @@
 import { typedAction } from './index';
 import { Dispatch, AnyAction } from 'redux';
 
-import {feedUpdate} from "./mock_data"
+import { feedUpdate } from "./mock_data"
 
 export type Post = {
     id: number,
-    source: string,
-    publishTime: string,
+    account: number,
+    created: string,
+    collected: string,
     title: string,
     description: string,
-    image: string,
     url: string
-    sourceId?: string,
-    boatId?: number,
-    sailorId?: number
+    source_id?: string,
 }
 
 export type PostState = {
@@ -32,11 +30,19 @@ export const addPosts = (products: Post[]) => {
 
 export const loadPosts = () => {
     return (dispatch: Dispatch<AnyAction>) => {
-        setTimeout(() => {
-            dispatch(
-                addPosts(feedUpdate['posts'])
-            );
-        }, 1000);
+        fetch("http://localhost:8000/api/posts/")
+            .then(res => res.json())
+            .then((result) => {
+                console.log(result['results'])
+                dispatch(
+                    addPosts(result['results'])
+                );
+            })
+        // setTimeout(() => {
+        //     dispatch(
+        //         addPosts(feedUpdate['posts'])
+        //     );
+        // }, 1000);
     };
 };
 
