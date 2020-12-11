@@ -137,5 +137,10 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'https://twenty12.github.io/social-media-aggregater/',
+    'https://twenty12.github.io',
+    'https://twenty12.github.io/',
+    'http://twenty12.github.io',
+    'http://twenty12.github.io/',
+    'http://twenty12.github.io/social-media-aggregater/',
     'spun.xyz',
 )
