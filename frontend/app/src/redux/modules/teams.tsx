@@ -1,8 +1,12 @@
 import { typedAction } from './index';
 import { Dispatch, AnyAction } from 'redux';
-
-import {sailorData, boatData} from "./mock_data"
-
+const getServerUrl = () => {
+    if (process.env.NODE_ENV == 'development') {
+        return 'http://localhost:8000/'
+    } else {
+        return 'https://social-media-aggregater.herokuapp.com/'
+    }
+}
 export type Account = {
     id: number,
     sailor: Sailor,
@@ -61,7 +65,7 @@ export const addAccount= (account:Account[]) => {
 
 export const loadAccounts = () => {
     return (dispatch: Dispatch<AnyAction>) => {
-        fetch("http://localhost:8000/api/accounts/")
+        fetch(getServerUrl() + "api/accounts/")
             .then(res => res.json())
             .then((result) => {
                 console.log(result['results'])
