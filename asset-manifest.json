@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/social-media-aggregater/static/css/main.65db26ae.chunk.css",
-    "main.js": "/social-media-aggregater/static/js/main.349a2e96.chunk.js",
-    "main.js.map": "/social-media-aggregater/static/js/main.349a2e96.chunk.js.map",
+    "main.js": "/social-media-aggregater/static/js/main.1ae6a296.chunk.js",
+    "main.js.map": "/social-media-aggregater/static/js/main.1ae6a296.chunk.js.map",
     "runtime-main.js": "/social-media-aggregater/static/js/runtime-main.e83b6bee.js",
     "runtime-main.js.map": "/social-media-aggregater/static/js/runtime-main.e83b6bee.js.map",
-    "static/js/2.d24b124a.chunk.js": "/social-media-aggregater/static/js/2.d24b124a.chunk.js",
-    "static/js/2.d24b124a.chunk.js.map": "/social-media-aggregater/static/js/2.d24b124a.chunk.js.map",
+    "static/js/2.5ba16b60.chunk.js": "/social-media-aggregater/static/js/2.5ba16b60.chunk.js",
+    "static/js/2.5ba16b60.chunk.js.map": "/social-media-aggregater/static/js/2.5ba16b60.chunk.js.map",
     "index.html": "/social-media-aggregater/index.html",
     "static/css/main.65db26ae.chunk.css.map": "/social-media-aggregater/static/css/main.65db26ae.chunk.css.map",
-    "static/js/2.d24b124a.chunk.js.LICENSE.txt": "/social-media-aggregater/static/js/2.d24b124a.chunk.js.LICENSE.txt"
+    "static/js/2.5ba16b60.chunk.js.LICENSE.txt": "/social-media-aggregater/static/js/2.5ba16b60.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e83b6bee.js",
-    "static/js/2.d24b124a.chunk.js",
+    "static/js/2.5ba16b60.chunk.js",
     "static/css/main.65db26ae.chunk.css",
-    "static/js/main.349a2e96.chunk.js"
+    "static/js/main.1ae6a296.chunk.js"
   ]
 }
