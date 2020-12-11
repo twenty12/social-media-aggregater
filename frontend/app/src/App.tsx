@@ -12,7 +12,7 @@ function App() {
     return (
         <div>
             <NavBar />
-            <button onClick={() => dispatch(loadPosts() as any)}>Load em</button>
+            {/* <button onClick={() => dispatch(loadPosts() as any)}>Load em</button> */}
             <Feed />
         </div>
     );

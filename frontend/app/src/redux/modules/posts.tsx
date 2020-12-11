@@ -1,7 +1,7 @@
 import { typedAction } from './index';
 import { Dispatch, AnyAction } from 'redux';
+import Config from '../Config'
 
-import { feedUpdate } from "./mock_data"
 
 export type Post = {
     id: number,
@@ -30,19 +30,14 @@ export const addPosts = (products: Post[]) => {
 
 export const loadPosts = () => {
     return (dispatch: Dispatch<AnyAction>) => {
+        console.log(Config)
         fetch("http://localhost:8000/api/posts/")
             .then(res => res.json())
             .then((result) => {
-                console.log(result['results'])
                 dispatch(
                     addPosts(result['results'])
                 );
             })
-        // setTimeout(() => {
-        //     dispatch(
-        //         addPosts(feedUpdate['posts'])
-        //     );
-        // }, 1000);
     };
 };
 

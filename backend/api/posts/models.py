@@ -42,7 +42,7 @@ class Account(models.Model):
         choices=PLATFORM_CHOICES,
     )
     account_id = models.CharField(max_length=500, null=True, blank=True)
-    account_name = models.CharField(max_length=500, null=True, blank=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
     flag = models.CharField(max_length=500, null=True, blank=True)
     sailor = models.ForeignKey(Sailor, blank=True, null=True, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, blank=True, null=True, on_delete=models.CASCADE)

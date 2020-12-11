@@ -17,10 +17,18 @@ class YouTubeScraper:
             response = requests.get(url=url)
             self.add_post(response.json(), account)
 
+    def reject_condition_exists(self, data, account):
+        if account.name == 'DMG MORI':
+            if 'Vendée Globe Update' not in data['snippet']['title']:
+                return True
+        return False
+
     def add_post(self, data, account):
         for item in data['items']:
             exists = Post.objects.filter(source_id=item['id']['videoId']).count()
             if exists:
+                continue
+            if self.reject_condition_exists(item, account):
                 continue
             post = Post(
                 account=account,

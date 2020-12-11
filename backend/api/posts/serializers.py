@@ -7,13 +7,21 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
     
+class BoatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Boat
+        fields = '__all__'
 
 class TeamSerializer(serializers.ModelSerializer):
+    boat = BoatSerializer()
+
     class Meta:
         model = Team
         fields = '__all__'
 
 class SailorSerializer(serializers.ModelSerializer):
+    boat = BoatSerializer()
+
     class Meta:
         model = Sailor
         fields = '__all__'
