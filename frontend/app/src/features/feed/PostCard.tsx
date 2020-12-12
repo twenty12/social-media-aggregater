@@ -27,7 +27,8 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
             )
         }
     }
-return (
+    const created: Date = new Date(postData.created)
+    return (
     <div key={postData.id} className="row justify-content-center">
         <div className="my-2 col-8">
             <div className="card border-dark">
@@ -45,7 +46,7 @@ return (
                     </div>
                 </div>
                 <div className="card-footer bg-white border-0 pt-0">
-                    <small>{postData.created}</small>
+                    <small>{created.toLocaleString()}</small>
                 </div>
             </div>
         </div>
