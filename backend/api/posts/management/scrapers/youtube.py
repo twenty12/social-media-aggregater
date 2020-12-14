@@ -16,7 +16,7 @@ class YouTubeScraper:
             )
             response = requests.get(url=url)
             self.add_post(response.json(), account)
-
+        print('Completed YouTube collection.')
     def reject_condition_exists(self, data, account):
         if account.name == 'DMG MORI':
             if 'Vendée Globe Update' not in data['snippet']['title']:

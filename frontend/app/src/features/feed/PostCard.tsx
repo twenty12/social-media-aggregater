@@ -12,6 +12,7 @@ type PostProps = {
 var nameToEmoji: { [key: string]: string; } = {
     UK: '🇬🇧',
     JPN: '🇯🇵',
+    DE: '🇩🇪'
 };
 
 
@@ -19,10 +20,11 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
     const header = () => {
         if (Object.keys(accountData).length != 0) {
             return (
+                <div>
                 <div className="d-flex">
                     <div className="mr-auto">{accountData.sailor.name} {nameToEmoji[accountData.flag]}</div>
-
-                    {/* <small>{accountData.sailor.boat}</small> */}
+                </div>
+                    <i>{accountData.sailor.boat?.name}</i>
                 </div>
             )
         }

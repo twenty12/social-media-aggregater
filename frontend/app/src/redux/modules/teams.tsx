@@ -28,7 +28,7 @@ export type Sailor = {
 
 export type Boat = {
     id: number,
-    name: string,
+    name?: string,
     built: string
 }
 
