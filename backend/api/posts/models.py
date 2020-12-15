@@ -9,6 +9,8 @@ class Boat(models.Model):
     name = models.CharField(max_length=500)
     built = models.DateField(null=True, blank=True)
     position = models.IntegerField(null=True, blank=True)
+    country = models.CharField(max_length=10, null=True, blank=True)
+
     def __str__(self):
         return self.name
 

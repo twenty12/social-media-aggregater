@@ -71,12 +71,6 @@ class YouTubeScraper:
         if account.name == 'DMG MORI':
             if 'Vendée Globe Update' not in data['snippet']['title']:
                 return True
-
-        if account.account_id == self.main_channel_id:
-            if account.sailor.name.lower() in data['snippet']['title'].lower():
-                return False
-            else:
-                return True
         return False
 
     def add_post(self, data, account):

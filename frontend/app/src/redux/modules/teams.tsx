@@ -69,7 +69,6 @@ export const loadAccounts = () => {
         fetch(getServerUrl() + "api/accounts/")
             .then(res => res.json())
             .then((result) => {
-                console.log(result['results'])
                 dispatch(
                     addAccount(result['results'])
                 );
