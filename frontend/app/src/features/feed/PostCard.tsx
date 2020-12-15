@@ -18,23 +18,26 @@ var nameToEmoji: { [key: string]: string; } = {
 
 const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
     const header = () => {
-        if (Object.keys(accountData).length != 0) {
+    const created: Date = new Date(postData.created)
+    if (Object.keys(accountData).length != 0) {
+            const position = accountData.sailor.boat?.position === 0 ? 'RET' : accountData.sailor.boat?.position
             return (
                 <div>
                 <div className="d-flex">
-                    <div className="mr-auto">{accountData.sailor.name} {nameToEmoji[accountData.flag]}</div>
+                    <div className="mr-auto">{accountData.sailor.name}</div>
+                    <small><div>{created.toLocaleString()}</div></small>
                 </div>
-                    <i>{accountData.sailor.boat?.name}</i>
+                    <small><i>{accountData.sailor.boat?.name} {nameToEmoji[accountData.flag]}</i></small><br></br>
+                    <small>Position: {position}</small>
                 </div>
             )
         }
     }
-    const created: Date = new Date(postData.created)
     return (
     <div key={postData.id} className="row justify-content-center">
         <div className="my-2 col-8">
             <div className="card border-dark">
-                <div className="card-header bg-white border-0">
+                <div className="card-header bg-white border-0 pb-0">
                     {header()}
                 </div>
                 <div className="card-body">
@@ -48,7 +51,6 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
                     </div>
                 </div>
                 <div className="card-footer bg-white border-0 pt-0">
-                    <small>{created.toLocaleString()}</small>
                 </div>
             </div>
         </div>

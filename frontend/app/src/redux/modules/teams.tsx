@@ -29,7 +29,8 @@ export type Sailor = {
 export type Boat = {
     id: number,
     name?: string,
-    built: string
+    built: string,
+    position?: number
 }
 
 export type Team = {

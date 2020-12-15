@@ -3,8 +3,8 @@ from posts.models import Post, Sailor, Boat, Team, Account
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('created',)
-    # search_fields = ['activity']
+    list_display = ('created', 'collected')
+    search_fields = ['account']
 
 class SailorAdmin(admin.ModelAdmin):
     list_display = ('name',)

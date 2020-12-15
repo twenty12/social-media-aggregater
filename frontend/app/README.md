@@ -3,6 +3,12 @@
 - Run `npm run deploy` to deploy
 
 # To dos
-# Add boat postion
-# Make time more readable
-# Add pagination
+ - Add boat postion
+ - Make time more readable
+ - Add pagination
+
+# Done
+ - Schedule tasks
+ - Add boat flag
+ - Setup dev and production vars
+ - Get domain setup
