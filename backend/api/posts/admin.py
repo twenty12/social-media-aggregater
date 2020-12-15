@@ -4,7 +4,7 @@ from posts.models import Post, Sailor, Boat, Team, Account
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('created', 'collected')
-    search_fields = ['account']
+    search_fields = ['source_id',]
 
 class SailorAdmin(admin.ModelAdmin):
     list_display = ('name',)

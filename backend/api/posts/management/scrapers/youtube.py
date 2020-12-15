@@ -2,6 +2,8 @@ import requests
 from posts.models import Account, Post
 import json
 import os
+import xml.etree.cElementTree as ET
+from bs4 import BeautifulSoup
 
 def write_dict_to_file(data, file_name):
     path = "/data/youtube/{}.txt".format(file_name)
@@ -35,8 +37,9 @@ class YouTubeScraper:
         ]
     def run(self):
         self.get_accounts()
-        self.add_posts_data()
-        self.check_main_account_for_onboard_uploads()
+        self.add_post_data_from_webpage()
+        # self.add_posts_data()
+        # self.check_main_account_for_onboard_uploads()
 
     def check_main_account_for_onboard_uploads(self):
         data = load_data_from_file('mock_data_for_vendee_account')
@@ -57,6 +60,33 @@ class YouTubeScraper:
             if account.account_id == self.main_channel_id:
                 return
             return get_youtube_account_data(account.account_id)
+    def add_post_data_from_webpage(self):
+
+        for account in self.accounts:
+            url = 'https://www.youtube.com/feeds/videos.xml?channel_id={}'.format(
+                account.account_id
+            )
+            soup = BeautifulSoup(requests.get(url).content, "xml")
+            for entry in soup.find_all('entry'):
+                source_id = entry.find('id').text.replace('yt:video:', '')
+                exists = Post.objects.filter(source_id=source_id).count()
+                if exists:
+                    continue
+                if self.reject_condition_exists(entry.find('title').text, account):
+                    continue
+                post = Post(
+                    account=account,
+                    title=entry.find('title').text,
+                    description=entry.find('media:group').find('media:description').text,
+                    created=entry.find('published').text,
+                    source_id=source_id,
+                    url=entry.find('media:group').find('media:content').get('url'),
+                    thumbnail=entry.find('media:group').find('media:thumbnail').get('url')
+                )
+                print('Adding {}\'s  -  {}'.format(
+                    account.name,
+                    post.title))
+
 
     def add_posts_data(self):
         for account in self.accounts:
@@ -67,18 +97,21 @@ class YouTubeScraper:
             self.add_post(data, account)
         print('Completed YouTube collection.')
 
-    def reject_condition_exists(self, data, account):
+    def reject_condition_exists(self, title, account):
         if account.name == 'DMG MORI':
-            if 'Vendée Globe Update' not in data['snippet']['title']:
+            if 'Vendée Globe Update' not in title:
                 return True
         return False
+
+    def add_post_from_web(self,data, account):
+        pass
 
     def add_post(self, data, account):
         for item in data['items']:
             exists = Post.objects.filter(source_id=item['id']['videoId']).count()
             if exists:
                 continue
-            if self.reject_condition_exists(item, account):
+            if self.reject_condition_exists(item['snippet']['title'], account):
                 continue
             _video_item_dict_to_post(item, account)
 

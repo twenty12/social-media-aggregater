@@ -60,4 +60,5 @@ class Post(models.Model):
     title = models.CharField(null=True, blank=True, max_length=500)
     description = models.TextField(null=True, blank=True)
     url = models.URLField(null=True, blank=True, unique=True)
+    thumbnail = models.URLField(null=True, blank=True, unique=True)
     source_id = models.CharField(max_length=500, null=True, blank=True, unique=True)
