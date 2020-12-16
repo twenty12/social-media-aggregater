@@ -37,7 +37,8 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
     }
 
     const handleClick = () => setShowThumb(false)
-    const thumbDiv = <img className="img-fluid" src={`https://img.youtube.com/vi/${postData.source_id}/maxresdefault.jpg`} />
+    const thumbDiv = <img className="img-fluid" src={postData.thumbnail} />
+    // const thumbDiv = <img className="img-fluid" src={`http://i.ytimg.com/vi/${postData.source_id}/maxresdefault.jpg`}  onError={(e)=>{console.log(e)}}/>
     const videoDiv = <div className="embed-responsive embed-responsive-16by9">
         <iframe
             className="embed-responsive-item border-0"
@@ -49,13 +50,13 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
 
     return (
         <div key={postData.id} className="row justify-content-center">
-            <div className="my-2 col-8">
+            <div className="my-2 col-sm-12 col-md-8">
                 <div className="card border-dark">
                     <div className="card-header bg-white border-0 pb-0">
                         {header()}
                     </div>
-                    <div onClick={handleClick} className="card-body">
-                    { showThumb ? thumbDiv : videoDiv }
+                    <div onClick={handleClick} className="card-body d-flex justify-content-center">
+                        { showThumb ? thumbDiv : videoDiv }
                     </div>
                     <div className="card-footer bg-white border-0 pt-0">
                     </div>
