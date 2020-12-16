@@ -12,7 +12,8 @@ type PostProps = {
 var nameToEmoji: { [key: string]: string; } = {
     UK: '🇬🇧',
     JPN: '🇯🇵',
-    DE: '🇩🇪'
+    DE: '🇩🇪',
+    FRN: '🇫🇷',
 };
 
 
