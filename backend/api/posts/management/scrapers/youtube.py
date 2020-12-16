@@ -86,6 +86,7 @@ class YouTubeScraper:
                 print('Adding {}\'s  -  {}'.format(
                     account.name,
                     post.title))
+                post.save()
 
 
     def add_posts_data(self):
