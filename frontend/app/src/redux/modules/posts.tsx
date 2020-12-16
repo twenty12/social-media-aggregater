@@ -12,16 +12,19 @@ export type Post = {
     description: string,
     url: string
     source_id?: string,
+    thumbnail?: string,
 }
 
 export type PostState = {
     posts: Post[];
     loading: boolean;
+    pageNumber: number;
 };
 
 const initialState: PostState = {
     posts: [],
     loading: true,
+    pageNumber: 1
 };
 
 const getServerUrl = () => {
@@ -32,13 +35,17 @@ const getServerUrl = () => {
     }
 }
 
+const getPageUrl = (pageNumber:number) => {
+    console.log(pageNumber)
+    return getServerUrl() + "api/posts/?page=" + pageNumber
+}
 export const addPosts = (products: Post[]) => {
     return typedAction('posts/ADD_POSTS', products);
 };
 
-export const loadPosts = () => {
+export const loadPosts = (pageNumber:number) => {
     return (dispatch: Dispatch<AnyAction>) => {
-        fetch(getServerUrl() + "api/posts/")
+        fetch(getPageUrl(pageNumber))
             .then(res => res.json())
             .then((result) => {
                 dispatch(
@@ -59,6 +66,7 @@ export function postReducer(
             return {
                 ...state,
                 loading: false,
+                pageNumber: state.pageNumber + 1,
                 posts: [...state.posts, ...action.payload],
             };
         default:
