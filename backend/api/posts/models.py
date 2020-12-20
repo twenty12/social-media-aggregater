@@ -48,6 +48,7 @@ class Account(models.Model):
     flag = models.CharField(max_length=500, null=True, blank=True)
     sailor = models.ForeignKey(Sailor, blank=True, null=True, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, blank=True, null=True, on_delete=models.CASCADE)
+    updated = models.DateTimeField(blank=True, null=True, auto_now=True)
 
     def __str__(self):
         return self.platform

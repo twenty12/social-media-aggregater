@@ -14,7 +14,8 @@ export type Account = {
     platform: string,
     account_id: string,
     account_name: string,
-    flag: string
+    flag: string,
+    updated: string
 }
 
 export type Sailor = {

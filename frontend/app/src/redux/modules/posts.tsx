@@ -19,12 +19,14 @@ export type PostState = {
     posts: Post[];
     loading: boolean;
     pageNumber: number;
+    showInfo: boolean;
 };
 
 const initialState: PostState = {
     posts: [],
     loading: true,
-    pageNumber: 1
+    pageNumber: 1,
+    showInfo: false
 };
 
 const getServerUrl = () => {
@@ -55,7 +57,14 @@ export const loadPosts = (pageNumber:number) => {
     };
 };
 
-type PostAction = ReturnType<typeof addPosts>;
+interface ActionB {
+    type: 'posts/TOGGLE_INFO';
+}
+export const toggleInfo = () => {
+    return typedAction('posts/TOGGLE_INFO');
+};
+
+type PostAction = ReturnType<typeof addPosts> | ActionB;
 
 export function postReducer(
     state = initialState,
@@ -68,6 +77,11 @@ export function postReducer(
                 loading: false,
                 pageNumber: state.pageNumber + 1,
                 posts: [...state.posts, ...action.payload],
+            };
+        case 'posts/TOGGLE_INFO':
+            return {
+                ...state,
+                showInfo: !state.showInfo
             };
         default:
             return state;

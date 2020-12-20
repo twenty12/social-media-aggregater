@@ -4,7 +4,7 @@ import json
 import os
 import xml.etree.cElementTree as ET
 from bs4 import BeautifulSoup
-
+from datetime import datetime
 def write_dict_to_file(data, file_name):
     path = "/data/youtube/{}.txt".format(file_name)
     file_to_open = os.path.dirname(__file__) + path
@@ -39,7 +39,7 @@ class YouTubeScraper:
         self.get_accounts()
         self.add_post_data_from_webpage()
         # self.add_posts_data()
-        # self.check_main_account_for_onboard_uploads()
+        self.check_main_account_for_onboard_uploads()
 
     def check_main_account_for_onboard_uploads(self):
         data = load_data_from_file('mock_data_for_vendee_account')
@@ -68,6 +68,9 @@ class YouTubeScraper:
             )
             soup = BeautifulSoup(requests.get(url).content, "xml")
             for entry in soup.find_all('entry'):
+                print('updating')
+                account.updated = datetime.utcnow()
+                account.save()
                 source_id = entry.find('id').text.replace('yt:video:', '')
                 exists = Post.objects.filter(source_id=source_id).count()
                 if exists:
