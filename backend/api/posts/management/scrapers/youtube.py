@@ -36,18 +36,22 @@ class YouTubeScraper:
             'Charlie Dalin'
         ]
     def run(self):
+        print('Starting Scrape')
         self.get_accounts()
         self.add_post_data_from_webpage()
         # self.add_posts_data()
         self.check_main_account_for_onboard_uploads()
-
+        print('Scrape Complete')
     def check_main_account_for_onboard_uploads(self):
         data = load_data_from_file('mock_data_for_vendee_account')
-        # data = get_youtube_account_data(self.main_channel_id)
+        data = get_youtube_account_data(self.main_channel_id)
         for account in self.accounts:
             for video in data['items']:
                 title = video['snippet']['title'].lower()
                 if account.sailor.name.lower() in title:
+                    exists = Post.objects.filter(source_id=video['id']['videoId']).count()
+                    if exists:
+                        continue
                     _video_item_dict_to_post(video, account)
 
     def get_data(self, account):
@@ -68,7 +72,6 @@ class YouTubeScraper:
             )
             soup = BeautifulSoup(requests.get(url).content, "xml")
             for entry in soup.find_all('entry'):
-                print('updating')
                 account.updated = datetime.utcnow()
                 account.save()
                 source_id = entry.find('id').text.replace('yt:video:', '')
