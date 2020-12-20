@@ -16,7 +16,7 @@ class TeamAdmin(admin.ModelAdmin):
     pass
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('platform', 'sailor', 'team', )
+    list_display = ('platform', 'sailor', 'flag', )
 
 def reg():
     to_reg = [

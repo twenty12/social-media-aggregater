@@ -14,11 +14,22 @@ var nameToEmoji: { [key: string]: string; } = {
     JPN: '🇯🇵',
     DE: '🇩🇪',
     FRN: '🇫🇷',
+    CH: '🇨🇭',
+    IT: '🇮🇹'
 };
-
+const wrapTags = (text: string, regex: RegExp, className?: string) => {
+    const textArray = text.split(regex);
+    return textArray.map(str => {
+      if (RegExp(':').test(str)) {
+        return <span className="d-block d-md-inline">{str}</span>;
+      }
+      return str;
+    });
+  };
 
 const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
     const [showThumb, setShowThumb] = useState(true)
+    //https://leewarrick.com/blog/a-guide-to-usestate-and-usereducer/
     const header = () => {
         const created: Date = new Date(postData.created)
         if (Object.keys(accountData).length != 0) {
@@ -26,10 +37,10 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
             return (
                 <div>
                     <div className="d-flex">
-                        <div className="mr-auto">{accountData.sailor.name}</div>
-                        <small><div>{created.toLocaleString()}</div></small>
+                        <div className="mr-auto ">{accountData.sailor.name}</div>
+                        <small className="mt-2 mb-n2">{wrapTags(created.toLocaleString(), RegExp(','), 'dog')}</small>
                     </div>
-                    <small><i>{accountData.sailor.boat?.name} {nameToEmoji[accountData.flag]}</i></small><br></br>
+                    <small><i>{accountData.sailor.boat?.name} {nameToEmoji[accountData.flag]} </i></small><br></br>
                     <small>Position: {position}</small>
                 </div>
             )
