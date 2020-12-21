@@ -1,9 +1,11 @@
 from django.contrib import admin
 from posts.models import Post, Sailor, Boat, Team, Account
 
+# class AccountInline(admin.TabularInline):
+#     model = Account
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('created', 'collected')
+    list_display = ('created', 'collected', 'account', 'thumbnail')
     search_fields = ['source_id',]
 
 class SailorAdmin(admin.ModelAdmin):

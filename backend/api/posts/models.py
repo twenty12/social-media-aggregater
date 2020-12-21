@@ -51,7 +51,7 @@ class Account(models.Model):
     updated = models.DateTimeField(blank=True, null=True, auto_now=True)
 
     def __str__(self):
-        return self.platform
+        return self.sailor.name
 
 
 class Post(models.Model):

@@ -135,7 +135,8 @@ def _video_item_dict_to_post(video, account):
         description=video['snippet']['description'],
         created=video['snippet']['publishTime'],
         source_id=video['id']['videoId'],
-        url='https://www.youtube.com/watch?v=' + video['id']['videoId']
+        url='https://www.youtube.com/watch?v=' + video['id']['videoId'],
+        thumbnail=video['thumbnails']['default']['url']
     )
     print('Adding {}\'s  -  {}'.format(
         account.name,
