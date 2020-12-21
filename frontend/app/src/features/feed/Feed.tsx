@@ -64,14 +64,13 @@ const Feed: FunctionComponent = () => {
         return created.toLocaleString()
     }
     const getInfoCard = () => {
-        console.log(accounts)
         if (showInfo) {
             return (
                 <div className="col-sm-12 mt-1 col-md-8 d-flex">
                     <div className="card border-dark w-100 ">
                         <div className="card-body py-1">
                             <div><small>Accounts monitored: {Object.keys(accounts).length}</small></div>
-                            <div><small>Last updated: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div>
+                            <div><small>Last YouTube check: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div>
                             {/* <div><small>Last updated race positions: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div> */}
                         </div>
                     </div>
