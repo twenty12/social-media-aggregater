@@ -29,8 +29,7 @@ function App() {
                     <Feed />
                 </Route>
                 <Route path="/">
-                    <Link to="race/vendee">vendee</Link>
-                    <h1>home</h1>
+                    <Link to="race/vendee-globe">vendee</Link>
                 </Route>
             </Switch>
         </Router>
