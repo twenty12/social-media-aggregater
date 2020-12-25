@@ -3,12 +3,19 @@
 - Run `npm run deploy` to deploy
 
 # To dos
- - Add boat postion
- - Make time more readable
- - Add pagination
-
+ - See about adding IG
+ - Add other races
+    - Routes for races
+    - DB tags for posts
+ 
 # Done
  - Schedule tasks
  - Add boat flag
  - Setup dev and production vars
  - Get domain setup
+ - Add pagination
+ - Add boat postion
+ - Make time more readable
+
+# Personal notes
+cmk+k cmk+i shows error

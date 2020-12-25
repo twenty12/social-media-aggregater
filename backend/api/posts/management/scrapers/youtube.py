@@ -5,6 +5,7 @@ import os
 import xml.etree.cElementTree as ET
 from bs4 import BeautifulSoup
 from datetime import datetime
+
 def write_dict_to_file(data, file_name):
     path = "/data/youtube/{}.txt".format(file_name)
     file_to_open = os.path.dirname(__file__) + path
