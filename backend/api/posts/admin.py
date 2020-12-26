@@ -1,5 +1,5 @@
 from django.contrib import admin
-from posts.models import Post, Sailor, Boat, Team, Account
+from posts.models import Post, Sailor, Boat, Team, Account, Event
 
 # class AccountInline(admin.TabularInline):
 #     model = Account
@@ -17,11 +17,14 @@ class BoatAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     pass
 
+class EventAdmin(admin.ModelAdmin):
+    pass
 class AccountAdmin(admin.ModelAdmin):
     list_display = ('platform', 'sailor', 'flag', )
 
 def reg():
     to_reg = [
+        (Event, EventAdmin),
         (Post, PostAdmin),
         (Sailor, SailorAdmin),
         (Boat, BoatAdmin),

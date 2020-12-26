@@ -5,6 +5,8 @@ import { loadPosts, toggleInfo } from "../../redux/modules/posts"
 import { loadAccounts, Account } from "../../redux/modules/teams"
 import { RootState } from "../../redux/reducer"
 import { AiOutlineInfoCircle } from 'react-icons/ai';
+import {useParams, Link} from "react-router-dom"
+import {ParamTypes} from "../Header"
 
 const arrToObjKeyedById = (arr: any) => {
     return arr.reduce(function (acc: any, cur: any, i: number) {
@@ -33,10 +35,12 @@ function useOnScreen(ref: any) {
 const Feed: FunctionComponent = () => {
     const dispatch = useDispatch()
     const pageNumber = useSelector((state: RootState) => state.post.pageNumber)
+    const {eventSlug} = useParams<ParamTypes>()
+
     const showInfo = useSelector((state: RootState) => state.post.showInfo)
     useEffect(() => {
-        dispatch(loadAccounts() as any)
-        dispatch(loadPosts(pageNumber) as any)
+        dispatch(loadAccounts(eventSlug) as any)
+        dispatch(loadPosts(pageNumber, eventSlug) as any)
         // dispatch(loadBoats() as any)
     }, [])
     const posts = useSelector((state: RootState) => state.post.posts)
@@ -56,8 +60,7 @@ const Feed: FunctionComponent = () => {
     const ref = useRef<HTMLHeadingElement>(null);
     const isVisible = useOnScreen(ref)
     if (isVisible && pageNumber > 1) {
-        console.log('loaded')
-        dispatch(loadPosts(pageNumber) as any)
+        dispatch(loadPosts(pageNumber, eventSlug) as any)
     }
     const getDateString = (updated: string) => {
         const created: Date = new Date(updated)
@@ -70,7 +73,7 @@ const Feed: FunctionComponent = () => {
                     <div className="card border-dark w-100 ">
                         <div className="card-body py-1">
                             <div><small>Accounts monitored: {Object.keys(accounts).length}</small></div>
-                            <div><small>Last YouTube check: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div>
+                            <div><small>Last YouTube check: { (Object.keys(accounts).length < 2 ? '' : getDateString(accounts['1'].updated))}</small></div>
                             {/* <div><small>Last updated race positions: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div> */}
                         </div>
                     </div>

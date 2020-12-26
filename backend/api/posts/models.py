@@ -1,10 +1,11 @@
 from django.db import models
 
 
-# TODO: add events to boat, sailor and team for quering
-# class Event(models.Model):
-#     name = models.CharField(max_length=500)
+class Event(models.Model):
+    name = models.SlugField(max_length=100)
 
+    def __str__(self):
+        return self.name
 class Boat(models.Model):
     name = models.CharField(max_length=500)
     built = models.DateField(null=True, blank=True)
@@ -13,6 +14,7 @@ class Boat(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Team(models.Model):
     name = models.CharField(max_length=500)
@@ -49,9 +51,10 @@ class Account(models.Model):
     sailor = models.ForeignKey(Sailor, blank=True, null=True, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, blank=True, null=True, on_delete=models.CASCADE)
     updated = models.DateTimeField(blank=True, null=True, auto_now=True)
+    events = models.ManyToManyField(Event, blank=True)
 
     def __str__(self):
-        return self.sailor.name
+        return self.name
 
 
 class Post(models.Model):

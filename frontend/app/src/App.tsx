@@ -24,7 +24,7 @@ function App() {
             {/* <button onClick={() => dispatch(loadPosts(pageNumber) as any)}>Load em</button> */}
             <Switch>
 
-                <Route path="/race/:raceSlug">
+                <Route path="/race/:eventSlug">
                     <NavBar />
                     <Feed />
                 </Route>

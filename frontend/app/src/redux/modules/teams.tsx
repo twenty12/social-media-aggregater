@@ -13,7 +13,7 @@ export type Account = {
     team?: Team,
     platform: string,
     account_id: string,
-    account_name: string,
+    name: string,
     flag: string,
     updated: string
 }
@@ -65,9 +65,9 @@ export const addAccount= (account:Account[]) => {
 //     };
 // };
 
-export const loadAccounts = () => {
+export const loadAccounts = (eventSlug:string) => {
     return (dispatch: Dispatch<AnyAction>) => {
-        fetch(getServerUrl() + "api/accounts/")
+        fetch(getServerUrl() + "api/accounts/?events__name=" + eventSlug)
             .then(res => res.json())
             .then((result) => {
                 dispatch(

@@ -37,17 +37,16 @@ const getServerUrl = () => {
     }
 }
 
-const getPageUrl = (pageNumber:number) => {
-    console.log(pageNumber)
-    return getServerUrl() + "api/posts/?page=" + pageNumber
+const getPageUrl = (pageNumber:number, eventSlug:string) => {
+    return getServerUrl() + "api/posts/?page=" + pageNumber + '&account__events__name=' + eventSlug
 }
 export const addPosts = (products: Post[]) => {
     return typedAction('posts/ADD_POSTS', products);
 };
 
-export const loadPosts = (pageNumber:number) => {
+export const loadPosts = (pageNumber:number, eventSlug:string) => {
     return (dispatch: Dispatch<AnyAction>) => {
-        fetch(getPageUrl(pageNumber))
+        fetch(getPageUrl(pageNumber, eventSlug))
             .then(res => res.json())
             .then((result) => {
                 dispatch(

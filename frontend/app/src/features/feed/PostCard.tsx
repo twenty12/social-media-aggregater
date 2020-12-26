@@ -33,15 +33,15 @@ const PostCard: FunctionComponent<PostProps> = ({ postData, accountData }) => {
     const header = () => {
         const created: Date = new Date(postData.created)
         if (Object.keys(accountData).length != 0) {
-            const position = accountData.sailor.boat?.position === 0 ? 'RET' : accountData.sailor.boat?.position
+            const getPosition = () => accountData.sailor.boat?.position === 0 ? 'RET' : accountData.sailor.boat?.position
             return (
                 <div>
                     <div className="d-flex">
-                        <div className="mr-auto ">{accountData.sailor.name}</div>
-                        <small className="mt-2 mb-n2">{wrapTags(created.toLocaleString(), RegExp(','), 'dog')}</small>
+                        <div className="mr-auto ">{accountData.sailor ? accountData.sailor.name : accountData.name}</div>
+                        <small className="mt-2 mb-n2">{accountData.sailor ? wrapTags(created.toLocaleString(), RegExp(','), '') : ''}</small>
                     </div>
-                    <small><i>{accountData.sailor.boat?.name} {nameToEmoji[accountData.flag]} </i></small><br></br>
-                    <small>Position: {position}</small>
+                    <small><i>{accountData.sailor ? accountData.sailor.boat?.name : ''} {nameToEmoji[accountData.flag]} </i></small><br></br>
+                    <small>{accountData.sailor ? 'Position: ' + getPosition() : ''}</small>
                 </div>
             )
         }

@@ -1,4 +1,4 @@
-from posts.models import Post, Account, Boat, Team, Sailor
+from posts.models import Post, Account, Boat, Team, Sailor, Event
 from rest_framework import serializers
 
 
@@ -6,7 +6,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-    
+
 class BoatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Boat
@@ -26,9 +26,16 @@ class SailorSerializer(serializers.ModelSerializer):
         model = Sailor
         fields = '__all__'
 
+class EventSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Event
+        fields = ('name',)
+
 class AccountSerializer(serializers.ModelSerializer):
     sailor = SailorSerializer()
     team = TeamSerializer()
+    events = EventSerializer(many=True)
     class Meta:
         model = Account
         fields = '__all__'
