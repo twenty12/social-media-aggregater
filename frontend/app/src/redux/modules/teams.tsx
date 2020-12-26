@@ -51,6 +51,10 @@ export const addAccount= (account:Account[]) => {
     return typedAction('teams/ADD_ACCOUNT', account);
 };
 
+export const clockTime = () => {
+    return typedAction('teams/CLOCK_TIME')
+}
+
 // export const addBoat = (boat:Boat[]) => {
 //     return typedAction('teams/ADD_BOAT', boat);
 // };
@@ -77,7 +81,18 @@ export const loadAccounts = (eventSlug:string) => {
     };
 };
 
-type ActionType = ReturnType<typeof addAccount>;
+export const clockElapsedTime = () => {
+    return (dispatch: Dispatch<AnyAction>) => {
+        console.log('CLocked')
+        dispatch(
+            clockTime()
+        )
+    }
+}
+interface Action {
+    type: 'teams/CLOCK_TIME';
+}
+type ActionType = ReturnType<typeof addAccount> | Action
 
 export function teamReducer(state = initialState, action: ActionType) {
     switch (action.type) {
@@ -86,6 +101,10 @@ export function teamReducer(state = initialState, action: ActionType) {
                 ...state,
                 accounts: [...state.accounts, ...action.payload],
             };
+        case 'teams/CLOCK_TIME':
+            return {
+                ...state
+            }
         default:
             return state;
     }

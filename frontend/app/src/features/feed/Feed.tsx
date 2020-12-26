@@ -66,6 +66,20 @@ const Feed: FunctionComponent = () => {
         const created: Date = new Date(updated)
         return created.toLocaleString()
     }
+    const getTimeElapsed = (updated: string) => {
+        const created: Date = new Date(updated)
+        const current: Date = new Date()
+        var timeDiff: number = current.getTime() - created.getTime()
+        timeDiff /= 1000;
+        var seconds = Math.round(timeDiff % 60);
+        timeDiff = Math.floor(timeDiff / 60);
+        var minutes = Math.round(timeDiff % 60);
+        timeDiff = Math.floor(timeDiff / 60);
+        var hours = Math.round(timeDiff % 24);
+        timeDiff = Math.floor(timeDiff / 24);
+
+        return hours + ":" + minutes + ":" + seconds
+    }
     const getInfoCard = () => {
         if (showInfo) {
             return (
@@ -73,7 +87,7 @@ const Feed: FunctionComponent = () => {
                     <div className="card border-dark w-100 ">
                         <div className="card-body py-1">
                             <div><small>Accounts monitored: {Object.keys(accounts).length}</small></div>
-                            <div><small>Last YouTube check: { (Object.keys(accounts).length < 2 ? '' : getDateString(accounts['1'].updated))}</small></div>
+                            <div><small>Time since YouTube check: { (Object.keys(accounts).length < 2 ? '' : getTimeElapsed(accounts[Object.keys(accounts)[0]].updated))}</small></div>
                             {/* <div><small>Last updated race positions: { (Object.keys(accounts).length < 2 ? 'a' : getDateString(accounts['1'].updated))}</small></div> */}
                         </div>
                     </div>

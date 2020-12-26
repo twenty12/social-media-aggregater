@@ -41,7 +41,7 @@ class YouTubeScraper:
         self.get_accounts()
         self.add_post_data_from_webpage()
         # self.add_posts_data()
-        self.check_main_account_for_onboard_uploads()
+        # self.check_main_account_for_onboard_uploads()
         print('Scrape Complete')
     def check_main_account_for_onboard_uploads(self):
         data = load_data_from_file('mock_data_for_vendee_account')
