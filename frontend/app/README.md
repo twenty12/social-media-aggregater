@@ -19,3 +19,4 @@
 
 # Personal notes
 cmk+k cmk+i shows error
+https://codesandbox.io/s/redux-with-typescript-vz2e4?file=/src/store/todos/types.ts

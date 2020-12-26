@@ -2,7 +2,7 @@ import React, { useEffect, FunctionComponent, useState, useRef } from 'react'
 import PostCard from './PostCard'
 import { useSelector, useDispatch } from "react-redux"
 import { loadPosts, toggleInfo } from "../../redux/modules/posts"
-import { loadAccounts, Account } from "../../redux/modules/teams"
+import { loadAccounts, Account, clockElapsedTime, startCounter } from "../../redux/modules/teams"
 import { RootState } from "../../redux/reducer"
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import {useParams, Link} from "react-router-dom"
@@ -14,11 +14,10 @@ const arrToObjKeyedById = (arr: any) => {
         return acc;
     }, {});
 }
+const padToTwo = (number: number) => number <= 9999 ? `000${number}`.slice(-2) : number;
 
 function useOnScreen(ref: any) {
-
     const [isIntersecting, setIntersecting] = useState(false)
-
     const observer = new IntersectionObserver(
         ([entry]) => setIntersecting(entry.isIntersecting)
     )
@@ -35,6 +34,8 @@ function useOnScreen(ref: any) {
 const Feed: FunctionComponent = () => {
     const dispatch = useDispatch()
     const pageNumber = useSelector((state: RootState) => state.post.pageNumber)
+    const timePassedSinceUpdate = useSelector((state: RootState) => state.team.timePassedSinceUpdate)
+    const counting = useSelector((state: RootState) => state.team.counting)
     const {eventSlug} = useParams<ParamTypes>()
 
     const showInfo = useSelector((state: RootState) => state.post.showInfo)
@@ -43,6 +44,17 @@ const Feed: FunctionComponent = () => {
         dispatch(loadPosts(pageNumber, eventSlug) as any)
         // dispatch(loadBoats() as any)
     }, [])
+
+    useEffect(() => {
+        if (counting){
+            const interval = setInterval(() => {
+                dispatch(clockElapsedTime() as any)
+              }, 1000);
+              return () => clearInterval(interval);
+            }
+      }, [counting]);
+
+
     const posts = useSelector((state: RootState) => state.post.posts)
     const loading = useSelector((state: RootState) => state.post.loading)
     const loadingDiv = (loading) ? <h1>Loading...</h1> : ''
@@ -67,9 +79,13 @@ const Feed: FunctionComponent = () => {
         return created.toLocaleString()
     }
     const getTimeElapsed = (updated: string) => {
+        if (!counting) {
+            dispatch(startCounter() as any)
+        }
         const created: Date = new Date(updated)
         const current: Date = new Date()
         var timeDiff: number = current.getTime() - created.getTime()
+
         timeDiff /= 1000;
         var seconds = Math.round(timeDiff % 60);
         timeDiff = Math.floor(timeDiff / 60);
@@ -78,7 +94,7 @@ const Feed: FunctionComponent = () => {
         var hours = Math.round(timeDiff % 24);
         timeDiff = Math.floor(timeDiff / 24);
 
-        return hours + ":" + minutes + ":" + seconds
+        return padToTwo(hours) + ":" + padToTwo(minutes) + ":" + padToTwo(seconds)
     }
     const getInfoCard = () => {
         if (showInfo) {

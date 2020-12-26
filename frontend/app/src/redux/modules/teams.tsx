@@ -1,5 +1,6 @@
 import { typedAction } from './index';
 import { Dispatch, AnyAction } from 'redux';
+import { count } from 'console';
 const getServerUrl = () => {
     if (process.env.NODE_ENV == 'development') {
         return 'http://localhost:8000/'
@@ -15,7 +16,7 @@ export type Account = {
     account_id: string,
     name: string,
     flag: string,
-    updated: string
+    updated: string,
 }
 
 export type Sailor = {
@@ -40,34 +41,28 @@ export type Team = {
 };
 
 export type AccountState = {
-    accounts: Account[]
+    accounts: Account[],
+    timePassedSinceUpdate: number,
+    counting: boolean
 }
 
 const initialState: AccountState = {
-    accounts: []
+    accounts: [],
+    timePassedSinceUpdate: 0,
+    counting: false
 };
 
-export const addAccount= (account:Account[]) => {
+export const addAccount = (account:Account[]) => {
     return typedAction('teams/ADD_ACCOUNT', account);
 };
+
+export const startCounter = () => {
+    return typedAction('teams/START_COUNTER')
+}
 
 export const clockTime = () => {
     return typedAction('teams/CLOCK_TIME')
 }
-
-// export const addBoat = (boat:Boat[]) => {
-//     return typedAction('teams/ADD_BOAT', boat);
-// };
-
-// export const loadBoats = () => {
-//     return (dispatch: Dispatch<AnyAction>) => {
-//         setTimeout(() => {
-//             dispatch(
-//                 addBoat(boatData['boats'])
-//             );
-//         }, 1000);
-//     };
-// };
 
 export const loadAccounts = (eventSlug:string) => {
     return (dispatch: Dispatch<AnyAction>) => {
@@ -80,10 +75,14 @@ export const loadAccounts = (eventSlug:string) => {
             })
     };
 };
+// export const toggleCountera = () => {
+//     return (dispatch: Dispatch<AnyAction>) => {
+//         dispatch(toggleCounterAction())
+//     }
+// }
 
 export const clockElapsedTime = () => {
     return (dispatch: Dispatch<AnyAction>) => {
-        console.log('CLocked')
         dispatch(
             clockTime()
         )
@@ -92,7 +91,11 @@ export const clockElapsedTime = () => {
 interface Action {
     type: 'teams/CLOCK_TIME';
 }
-type ActionType = ReturnType<typeof addAccount> | Action
+interface StartCounter {
+    type: 'teams/START_COUNTER'
+}
+type ActionType = ReturnType<typeof addAccount> | Action | StartCounter
+
 
 export function teamReducer(state = initialState, action: ActionType) {
     switch (action.type) {
@@ -103,8 +106,13 @@ export function teamReducer(state = initialState, action: ActionType) {
             };
         case 'teams/CLOCK_TIME':
             return {
-                ...state
+                ...state,
+                timePassedSinceUpdate: state.timePassedSinceUpdate + 1
             }
+        case 'teams/START_COUNTER':
+            return {
+                ...state,
+                counting: true            }    
         default:
             return state;
     }
